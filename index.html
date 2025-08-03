@@ -1,49 +1,175 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    <title>my cv</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kaustubh Krishna — Autonomous Systems</title>
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/logo.svg"/>
+
+  <style>
+    /* ---------- GLOBAL ---------- */
+    body            {font-family:'Inter',sans-serif;background:#10131a;color:#f5f5f5;}
+    a               {transition:all .25s;}
+    /* glowing grid under everything */
+    body::after     {content:"";position:fixed;inset:0;z-index:-4;
+                     background:
+                       repeating-linear-gradient(0deg , #16202b33 0 1px , transparent 1px 40px),
+                       repeating-linear-gradient(90deg, #16202b33 0 1px , transparent 1px 40px);}
+    /* ---------- CARD / PANEL UTILITIES ---------- */
+    .panel          {background:#111b/70;border:1px solid #00fff733;
+                     backdrop-filter:blur(12px);
+                     box-shadow:0 0 20px #00fff71c,0 0 8px #00ff9925;
+                     border-radius:1rem;transition:box-shadow .3s,transform .25s;}
+    .panel:hover    {box-shadow:0 0 36px #00fff7cc,0 0 16px #00ff99a6;transform:translateY(-4px);}
+    /* ---------- HERO CTA pulse ---------- */
+    .neon-cta       {box-shadow:0 0 12px #00fff7bf,0 0 28px #00ff99a3;animation:pulse 2s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{box-shadow:0 0 12px #00fff7bf,0 0 28px #00ff99a3}
+                     50%     {box-shadow:0 0 28px #00fff7,  0 0 44px #00ff99}}
+    /* ---------- FULLSCREEN CANVAS NEURAL NET ---------- */
+    #bgCanvas       {position:fixed;inset:0;z-index:-3;width:100vw;height:100vh;pointer-events:none}
+  </style>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 </head>
-<body>
-  <div class="navbar">
-    <a href="#Home">Home</a>
-    <a href="#About">About</a>
-    <a href="#Contact">Contact</a>
+<body class="leading-relaxed">
+
+<!-- ✨ Neon Neural-Net Canvas -->
+<canvas id="bgCanvas"></canvas>
+<script>
+const c=document.getElementById('bgCanvas'),x=c.getContext('2d');function res(){c.width=innerWidth;c.height=innerHeight;}addEventListener('resize',res);res();
+let t=0;function loop(){
+ x.clearRect(0,0,c.width,c.height);
+ const N=66,n=[],R=Math.min(c.width,c.height)/2.2;
+ for(let i=0;i<N;i++){let a=i/N*6.283+t/19,nx=c.width/2+Math.cos(a+Math.sin(t/49+i))*R*.93,ny=c.height/2+Math.sin(a+Math.cos(t/63-i))*R*.93;n.push([nx,ny]);}
+ for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){let d=Math.hypot(n[i][0]-n[j][0],n[i][1]-n[j][1]);if(d<144){x.strokeStyle='rgba(0,255,247,.1)';x.lineWidth=1.5;x.shadowBlur=12;x.shadowColor='#00fff7';x.beginPath();x.moveTo(...n[i]);x.lineTo(...n[j]);x.stroke();x.shadowBlur=0;}}
+ n.forEach((p,i)=>{x.beginPath();x.arc(p[0],p[1],3.3+1.2*Math.sin(t/16+i),0,6.283);x.fillStyle=i%2?'#00fff7c4':'#00ff99c4';x.shadowBlur=6;x.shadowColor=x.fillStyle;x.fill();x.shadowBlur=0;});
+ t++;requestAnimationFrame(loop);}
+loop();
+</script>
+
+<!-- ---------- HERO ---------- -->
+<header class="min-h-screen flex flex-col justify-center items-center text-center px-4">
+  <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-[0_2px_10px_#00fff7aa]">Kaustubh Krishna</h1>
+  <span id="typed" class="block text-lg md:text-2xl font-semibold h-8 neon-cta mt-2"></span>
+
+  <p class="mt-6 max-w-xl text-base md:text-lg text-gray-200">
+    Building <span class="font-bold text-[#00fff7]">production-grade autonomous robots</span> with Isaac Sim → ROS 2 → real hardware.<br>
+    RL where classical control hits a wall.
+  </p>
+
+  <a href="#work" class="mt-10 inline-block px-7 py-3 rounded-full bg-[#00fff7] text-[#10131a] font-bold neon-cta hover:scale-105">
+    See my work ↓
+  </a>
+
+  <!-- Quick Metrics -->
+  <div class="flex flex-wrap justify-center gap-6 mt-12 text-[#00ffb8] font-semibold text-sm md:text-base">
+    <div>3 real-world robotics stacks</div>
+    <div>28 % error ↓ vs PID/MPC</div>
+    <div>ICRA F1Tenth Top-3</div>
   </div>
-    <div class="entry_div">
-      <h1 class="title">I'm Kaustubh</h1>
+</header>
+
+<!-- ---------- MANIFESTO ---------- -->
+<section id="manifesto" class="panel max-w-3xl mx-auto my-24 px-6 py-12">
+  <h2 class="text-2xl md:text-3xl font-bold text-[#00fff7] mb-4">What I’m Building & Why</h2>
+  <p class="text-lg text-gray-200">
+    I build <span class="font-semibold text-[#00ff99]">autonomous robotics systems</span> for the real world—not academic toy demos.
+    <br><span class="text-[#00fff7] font-medium">Reinforcement Learning where classical control fails.</span>
+    <br><br>
+    My goal: deliver the core automation platform for next-gen manufacturing. Everything below is proof-of-work on that path.
+  </p>
+</section>
+
+<!-- ---------- WORK / PROJECTS ---------- -->
+<section id="work" class="px-4 pb-24 max-w-6xl mx-auto">
+  <h2 class="text-3xl font-bold mb-14 text-center drop-shadow-[0_1.5px_6px_#00fff788]">Featured Projects</h2>
+
+  <!-- RLx-Core -->
+  <article class="panel grid md:grid-cols-12 gap-8 mb-16 p-6">
+    <img class="md:col-span-5 w-full rounded-xl shadow-lg" src="assets/isaac-sim.png" alt="Isaac Sim screenshot">
+    <div class="md:col-span-7 flex flex-col justify-center">
+      <h3 class="text-2xl font-bold text-[#00fff7]">RLx-Core — Model-Based RL Stack</h3>
+      <p class="mt-2 text-gray-200">
+        Modular MBPO / SAC / TD3 in JAX, Hydra-configurable, CI’ed in Isaac Sim.
+        <br><span class="text-[#00ff99] font-semibold">28 % path-error reduction vs tuned MPC</span>.
+      </p>
+      <div class="mt-4 space-x-6">
+        <a href="https://github.com/YOURUSER/rlx-core"     target="_blank" class="underline text-[#00fff7]">Repo</a>
+        <a href="https://wandb.ai/YOURUSER/rlx-core"       target="_blank" class="underline text-[#00ff99]">W&B Logs</a>
+      </div>
     </div>
-    <div class="introduction">
-      <p>I am a developer and a gamer</p>
+  </article>
+
+  <!-- F1Tenth -->
+  <article class="panel grid md:grid-cols-12 gap-8 mb-16 p-6">
+    <img class="md:col-span-5 w-full rounded-xl shadow-lg" src="assets/f1tenth.gif" alt="F1Tenth gif">
+    <div class="md:col-span-7 flex flex-col justify-center">
+      <h3 class="text-2xl font-bold text-[#00fff7]">ICRA F1Tenth — Top 3 Global</h3>
+      <p class="mt-2 text-gray-200">
+        End-to-end racing policy; <span class="text-[#00ff99] font-semibold">37 % faster</span> than baseline.<br>
+        Full stack & evaluation logs public.
+      </p>
+      <div class="mt-4 space-x-6">
+        <a href="https://github.com/YOURUSER/icra-f1tenth" target="_blank" class="underline text-[#00fff7]">Repo</a>
+        <a href="assets/ICRA_Result.pdf"                   target="_blank" class="underline text-[#00ff99]">Result PDF</a>
+      </div>
     </div>
-    <div class="intro">
-      <img src="C:\Users\Kaustubh\OneDrive\Desktop\my cv\my_pic.jpeg" alt>
+  </article>
+
+  <!-- CARLA -->
+  <article class="panel grid md:grid-cols-12 gap-8 p-6">
+    <img class="md:col-span-5 w-full rounded-xl shadow-lg" src="assets/carla-e2e.png" alt="CARLA E2E">
+    <div class="md:col-span-7 flex flex-col justify-center">
+      <h3 class="text-2xl font-bold text-[#00fff7]">CARLA End-to-End Self-Driving</h3>
+      <p class="mt-2 text-gray-200">
+        Vision-to-Control network (imitation + n-step Q). Handles urban turns, traffic lights, dynamic vehicles.
+      </p>
+      <div class="mt-4 space-x-6">
+        <a href="https://github.com/YOURUSER/carla-e2e"    target="_blank" class="underline text-[#00fff7]">Repo</a>
+        <a href="assets/carla-demo.mp4"                    target="_blank" class="underline text-[#00ff99]">Demo Video</a>
+      </div>
     </div>
-    <div class="About">
-      <h1> My Skills</h1>
-    </div>
-    <hr>
-<div class="Skills">
-  <h1>
-    <u>Skills</u>
-  </h1>
-  <h3>Gaming</h3>
-  <img src="C:\Users\Kaustubh\OneDrive\Desktop\my cv\skills_freefire.jpg" alt="Gaming">
-  <p>My hobby is gaming. I love playing games.</p>
-</div>
-<div class="Skills_2">
-  <h3>Robotics</h3>
-  <img src="C:\Users\Kaustubh\OneDrive\Desktop\my cv\robotics.jpg" alt="robotics">
-   <p>Till the date I have achived a lot in robotics and programming. I have build a lot of projects from Arduino, lego mindstorms etc.</p>
-</div>
-  <h2 class="Con"> Want to contact</h2>
-<div class="Contacts">
-  <h3>contact me in following ways </h3>
-    <a href="mailto:kkaustubh2006@gmail.com"><img class="mail" src="C:\Users\Kaustubh\OneDrive\Desktop\my cv\gmail.WEBP" </a>
-    <a href="https://www.facebook.com\kaustubhkrishna"><img class="facebook" src="C:\Users\Kaustubh\OneDrive\Desktop\my cv\facebook.png"</a>
-    <a href="https://www.instagram.com\kaustubh135"><img class="instagram" src="C:\Users\Kaustubh\OneDrive\Desktop\my cv\instagram.jpg"</a>
+  </article>
+
+  <!-- Placeholder -->
+  <div class="mt-20 text-center text-sm text-[#00fff7a6] font-mono">
+    ⚙️ On-vehicle Golf-Cart navigation stack (ROS 2) — RL upgrade coming soon
+  </div>
+</section>
+
+<!-- ---------- ROADMAP ---------- -->
+<section id="roadmap" class="panel max-w-3xl mx-auto my-24 px-6 py-12">
+  <h2 class="text-2xl md:text-3xl font-bold text-[#00fff7] mb-4">What’s Next</h2>
+  <ul class="list-disc pl-6 space-y-3 text-gray-200 text-lg">
+    <li><span class="text-[#00ff99] font-semibold">Phase 7 — Dreamer in Isaac Sim:</span> industrial pick-and-place with dynamic obstacles.</li>
+    <li><span class="text-[#00ff99] font-semibold">Phase 8 — World Models for Predictive Maintenance:</span> pre-empt rare failures, beyond MPC.</li>
+    <li><span class="text-[#00ff99] font-semibold">Stealth:</span> plug-and-play RL + ROS 2 stack for real factories.</li>
+  </ul>
+  <div class="mt-6 text-[#00fff7] font-semibold italic">Want in? → Drop a note.</div>
+</section>
+
+<!-- ---------- CONTACT ---------- -->
+<footer class="py-16 text-center border-t border-[#00fff75c] bg-[#10131a]">
+  <h2 class="text-2xl font-bold mb-3 text-[#fff]">Let’s build something real.</h2>
+  <p class="mb-6">Email <span id="email" class="underline cursor-pointer text-[#00fff7]">kaustubhkr12@gmail.com</span></p>
+  <div class="space-x-8 text-[#00ff99] font-bold text-lg">
+    <a href="https://github.com/1Kaustubh122"                  target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/kaustubhkrishna/"     target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<!-- ---------- INITIALISE TYPED & COPY EMAIL ---------- -->
+<script>
+new Typed("#typed",{strings:["Autonomous Systems Engineer","Sim-to-Real Specialist","RL-First Robotics Builder"],
+  typeSpeed:60,backSpeed:40,loop:true});
+document.getElementById("email").onclick=()=>{navigator.clipboard.writeText("kaustubhkr12@gmail.com");
+  alert("Email copied");};
+</script>
 </body>
 </html>
