@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RLx-Core — Reinforcement Learning for Industrial Automation</title>
+  <title>RLx-Core :  Reinforcement Learning for Industrial Automation</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: 'Inter', sans-serif; background-color: #0f1117; color: #e0f7fa; }
@@ -13,7 +13,7 @@
 </head>
 <body class="px-6 py-8 max-w-5xl mx-auto">
   <h1 class="text-4xl font-bold text-cyan-400 mb-2">RLx-Core</h1>
-  <p class="italic text-slate-400 mb-6">A zero-toy, plug-and-play RL pipeline I’m carving out for real automation — not demo videos.</p>
+  <p class="italic text-slate-400 mb-6">A zero-toy, plug-and-play RL pipeline I’m carving out for real automation</p>
 
   <h2 class="text-2xl font-bold text-white mt-10 mb-2">Why RLx-Core exists</h2>
   <p class="text-slate-300 mb-6">I’m tired of “RL in robotics” papers that line‑up a MuJoCo Hopper, claim novelty, and call it a day. Factories, warehouses, and outdoor robots need controllers that survive drifting joints, busted sensors, part tolerances, and operators who kick the cell at 3 a.m. RLx‑Core is my long‑haul proof that modern RL <strong>can</strong> out‑perform PID/MPC/H₂/H∞ once the problem stops being clean and academic.</p>
@@ -44,10 +44,10 @@
       </thead>
       <tbody class="text-slate-300">
         <tr><td class="p-2">1</td><td class="p-2 font-bold">Tabular RL Bootcamp</td><td class="p-2">Remember why TD, SARSA, Q‑learning work before touching GPUs.</td><td class="p-2">2D gridworld & bandits</td><td class="p-2">✅</td></tr>
-        <tr><td class="p-2">2</td><td class="p-2 font-bold">Function Approx. Warm-up</td><td class="p-2">Swap tables for small MLPs—debug gradients, nothing fancy.</td><td class="p-2">Cartpole, Reacher (dm_control)</td><td class="p-2">✅</td></tr>
-        <tr><td class="p-2">3</td><td class="p-2 font-bold">DQN Zoo</td><td class="p-2">Double, Dueling, PER—make discrete control rock solid.</td><td class="p-2">Walker, Cheetah (dm_control)</td><td class="p-2">✅</td></tr>
-        <tr><td class="p-2">4</td><td class="p-2 font-bold">Policy Gradient Burst</td><td class="p-2">PPO + TRPO for smooth torque domains.</td><td class="p-2">Humanoid (dm_control)</td><td class="p-2">✅</td></tr>
-        <tr><td class="p-2">5</td><td class="p-2 font-bold">Actor-Critic Precision</td><td class="p-2">TD3, SAC, REDQ—low‑jitter continuous control.</td><td class="p-2">Ant, PyBullet arm</td><td class="p-2">✅</td></tr>
+        <tr><td class="p-2">2</td><td class="p-2 font-bold">Function Approx. Warm-up</td><td class="p-2">Swap tables for small MLPs: debug gradients, nothing fancy.</td><td class="p-2">Cartpole (dm_control)</td><td class="p-2">✅</td></tr>
+        <tr><td class="p-2">3</td><td class="p-2 font-bold">DQN Zoo</td><td class="p-2">Double, Dueling, PER: make discrete control rock solid.</td><td class="p-2">Cartpole (dm_control)</td><td class="p-2">✅</td></tr>
+        <tr><td class="p-2">4</td><td class="p-2 font-bold">Policy Gradient Burst</td><td class="p-2">PPO + TRPO for smooth torque domains.</td><td class="p-2">quadruped, Walker Humanoid (dm_control)</td><td class="p-2">✅</td></tr>
+        <tr><td class="p-2">5</td><td class="p-2 font-bold">Actor-Critic Precision</td><td class="p-2">TD3, SAC, REDQ: low‑jitter continuous control.</td><td class="p-2">quadruped, cheetah</td><td class="p-2">✅</td></tr>
         <tr><td class="p-2">6</td><td class="p-2 font-bold">Model-Based RL</td><td class="p-2">Learn dynamics ➜ cut sample cost 10×.</td><td class="p-2">Custom Isaac Sim arm</td><td class="p-2">🚧</td></tr>
         <tr><td class="p-2">7</td><td class="p-2 font-bold">Dreamer Vision Control</td><td class="p-2">Latent world model + pixel input; long‑horizon pick‑&‑place with moving obstacles.</td><td class="p-2">Isaac Sim conveyor scene</td><td class="p-2">🗓</td></tr>
         <tr><td class="p-2">8</td><td class="p-2 font-bold">World-Models for Faults</td><td class="p-2">Predict rare machine failures before they bite.</td><td class="p-2">Synthetic factory with fault injection</td><td class="p-2">🗓</td></tr>
@@ -60,7 +60,7 @@
         <tr><td class="p-2">15</td><td class="p-2 font-bold">Transformer-Based RL</td><td class="p-2">Feed long history, schedule multiple jobs smartly.</td><td class="p-2">Job‑shop scheduling sim</td><td class="p-2">🗓</td></tr>
         <tr><td class="p-2">16</td><td class="p-2 font-bold">Robust Sim-to-Real</td><td class="p-2">Domain‑rand + adversaries so policy doesn’t die on real hardware.</td><td class="p-2">Isaac ➜ UR10 bench + ROS2</td><td class="p-2">🗓</td></tr>
         <tr><td class="p-2">17</td><td class="p-2 font-bold">Real-Time RL</td><td class="p-2">Sub‑5 ms inference for high‑speed tasks.</td><td class="p-2">High‑RPM feeder station</td><td class="p-2">🗓</td></tr>
-        <tr><td class="p-2">18</td><td class="p-2 font-bold">Multi-Task / Transfer</td><td class="p-2">One policy, many SKUs—beat “retrain from scratch”.</td><td class="p-2">Mixed‑product line</td><td class="p-2">🗓</td></tr>
+        <tr><td class="p-2">18</td><td class="p-2 font-bold">Multi-Task / Transfer</td><td class="p-2">One policy, many SKUs: beat “retrain from scratch”.</td><td class="p-2">Mixed‑product line</td><td class="p-2">🗓</td></tr>
         <tr><td class="p-2">19</td><td class="p-2 font-bold">Risk-Sensitive / Safe RL</td><td class="p-2">Keep throughput high <em>and</em> respect safety margins.</td><td class="p-2">Safety‑critical arm + laser curtain</td><td class="p-2">🗓</td></tr>
       </tbody>
     </table>
@@ -76,7 +76,7 @@
   </ul>
 
   <h2 class="text-2xl font-bold text-white mt-10 mb-2">Current Focus</h2>
-  <p class="text-slate-300 mb-6">Phase 6 — building noisy tolerance assembly envs in Isaac Sim, training MBPO from scratch, validating against PID benchmarks.</p>
+  <p class="text-slate-300 mb-6">Phase 6:  building noisy tolerance assembly envs in Isaac Sim, training MBPO, PETs and PlaNet from scratch.</p>
 
   <h2 class="text-2xl font-bold text-white mt-10 mb-2">Project Tags</h2>
   <div class="flex flex-wrap gap-2 text-sm">
