@@ -4,8 +4,8 @@ const projects = [
   title: "RLx-Core -> Industrial RL Engine",
   short: "Zero-toy modular RL stack for automation. Phase 6 in progress.",
   long: "",
-  video: "assets/rlx_core_vid2.webm",  // video for modal
-  thumbnail: "assets/rlx_core_vid1.webm", // video for index page
+  video: "assets/rlx_core_vid2.webm",  
+  thumbnail: "assets/rlx_core_vid1.webm", 
   tags: [
     "Flax-based RL Engine",
     "Production-Grade Robotics",
@@ -31,7 +31,19 @@ const projects = [
     { label: "Results", url: "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-icra-2025/#results" },
     { label: "YouTube", url: "https://www.youtube.com/watch?v=AmnK0JQ3ayQ" }
   ]
+},
+{
+  id: "self-driving",
+  title: "Self‑Driving car, Integrating with Autoware",
+  short: "Autonomous golf cart using ROS 2",
+  long: "Trained agent via PPO and Behavior Cloning, using RGB + segmentation data, implemented in CARLA environment with custom ResNet-18. Demonstrates integration of perception, planning, and RL execution in a complete pipeline.",
+  image: "assets/future_work.png",
+  tags: ["Autonomous Driving", "Perception", "ROS2", "Autoware"],
+  // links: [
+  //   { label: "GitHub", url: "https://github.com/1Kaustubh122/Self_Driving_Car" }
+  // ]
 }
+
 ];
 
 window.addEventListener("DOMContentLoaded", () => {
