@@ -1,59 +1,62 @@
 const projects = [
-{
-  id: "rlx-core",
-  title: "RLx-Core -> Industrial RL Engine",
-  short: "Zero-toy modular RL stack for automation. Phase 6 in progress.",
-  long: "",
-  video: "assets/rlx_core_vid2.webm",  
-  thumbnail: "assets/rlx_core_vid1.webm", 
-  tags: [
-    "Flax-based RL Engine",
-    "Production-Grade Robotics",
-    "Custom Isaac Sim Envs",
-    "ONNX-Ready Inference",
-    "Hydra Config Stack",
-    "Sim-to-Real Control",
-    "RL for Industrial Automation"
-  ],
-  links: [
-    { label: "GitHub", url: "https://github.com/1Kaustubh122/rlx-core" },
-    { label: "Project Overview", url: "rlx-core.html" } 
-  ]
-},
-{
-  id: "autodrive",
-  title: "RoboRacer Sim Racing League @ ICRA 2025",
-  long: "RoboRacer Autonomous Racing is a semi-regular competition organized by an international community of researchers, engineers, and autonomous systems enthusiasts. The teams participating in the 24th RoboRacer Autonomous Racing Competition at ICRA 2025 will write software for a 1:10 scaled autonomous racecar to fulfill the objectives of the competition: drive fast but don’t crash!",
-  short : "Qualified for ICRA RoboRacer finals with a reinforcement learning-based driving policy trained in simulation.  Ranked 3rd in qualifiers (ICRA RoboRacer 2025).",
-  image: "assets/autodrive_thumb.png", 
-  tags: ["Autonomous Racing", "RL", "ICRA 2025", "AutoDrive Ecosystem"],
-  links: [
-    { label: "Results", url: "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-icra-2025/#results" },
-    { label: "YouTube", url: "https://www.youtube.com/watch?v=AmnK0JQ3ayQ" }
-  ]
-},
-{
-  id: "self-driving",
-  title: "Self‑Driving car, Integrating with Autoware",
-  short: "Autonomous golf cart using ROS 2",
-  long: "Trained agent via PPO and Behavior Cloning, using RGB + segmentation data, implemented in CARLA environment with custom ResNet-18. Demonstrates integration of perception, planning, and RL execution in a complete pipeline.",
-  image: "assets/future_work.png",
-  tags: ["Autonomous Driving", "Perception", "ROS2", "Autoware"],
-  // links: [
-  //   { label: "GitHub", url: "https://github.com/1Kaustubh122/Self_Driving_Car" }
-  // ]
-}
-
+  {
+    id: "rlx-core",
+    title: "RLx-Core -> Industrial RL Engine",
+    short: "Zero-toy modular RL stack for automation. Phase 6 in progress.",
+    long: "",
+    video: "assets/rlx_core_vid2.webm",
+    thumbnail: "assets/rlx_core_vid1.webm",
+    tags: [
+      "Flax-based RL Engine",
+      "Production-Grade Robotics",
+      "Custom Isaac Sim Envs",
+      "ONNX-Ready Inference",
+      "Hydra Config Stack",
+      "Sim-to-Real Control",
+      "RL for Industrial Automation"
+    ],
+    links: [
+      { label: "GitHub", url: "https://github.com/1Kaustubh122/rlx-core" },
+      { label: "Project Overview", url: "rlx-core.html" }
+    ]
+  },
+  {
+    id: "autodrive",
+    title: "RoboRacer Sim Racing League @ ICRA 2025",
+    long: "RoboRacer Autonomous Racing is a semi-regular competition organized by an international community of researchers, engineers, and autonomous systems enthusiasts. The teams participating in the 24th RoboRacer Autonomous Racing Competition at ICRA 2025 will write software for a 1:10 scaled autonomous racecar to fulfill the objectives of the competition: drive fast but don’t crash!",
+    short: "Qualified for ICRA RoboRacer finals with a reinforcement learning-based driving policy trained in simulation.  Ranked 3rd in qualifiers (ICRA RoboRacer 2025).",
+    image: "assets/autodrive_thumb.png",
+    tags: ["Autonomous Racing", "RL", "ICRA 2025", "AutoDrive Ecosystem"],
+    links: [
+      { label: "Results", url: "https://autodrive-ecosystem.github.io/competitions/roboracer-sim-racing-icra-2025/#results" },
+      { label: "YouTube", url: "https://www.youtube.com/watch?v=AmnK0JQ3ayQ" }
+    ]
+  },
+  {
+    id: "self-driving",
+    title: "Self‑Driving car, Integrating with Autoware",
+    short: "Autonomous golf cart using ROS 2",
+    long: "Trained agent via PPO and Behavior Cloning, using RGB + segmentation data, implemented in CARLA environment with custom ResNet-18. Demonstrates integration of perception, planning, and RL execution in a complete pipeline.",
+    image: "assets/future_work.png",
+    tags: ["Autonomous Driving", "Perception", "ROS2", "Autoware"],
+    links: [
+      { label: "GitHub", url: "https://github.com/1Kaustubh122/Self_Driving_Car" }
+    ]
+  }
 ];
 
 window.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("project-grid");
 
+  // Remove any existing modal (for hot reload etc.)
+  let oldModal = document.getElementById("project-modal");
+  if (oldModal) oldModal.remove();
+
   const modal = document.createElement("div");
   modal.id = "project-modal";
   modal.className = "fixed inset-0 z-50 bg-black/70 backdrop-blur flex items-center justify-center hidden";
   modal.innerHTML = `
-    <div class="relative w-full max-w-3xl mx-4 rounded-xl overflow-hidden bg-[#111827] shadow-2xl">
+    <div class="relative w-full max-w-3xl mx-4 rounded-xl overflow-hidden bg-[#111827] shadow-2xl" id="modal-content">
       <div id="modal-media" class="w-full aspect-video bg-black"></div>
       <div class="p-6">
         <h3 id="modal-title" class="text-2xl font-extrabold text-cyan-400 mb-2"></h3>
@@ -85,10 +88,15 @@ window.addEventListener("DOMContentLoaded", () => {
     grid.appendChild(card);
   });
 
-  document.getElementById("close-modal").onclick = () => {
-    modal.classList.add("hidden");
-    document.getElementById("modal-media").innerHTML = "";
-  };
+  // Cross button closes modal
+  document.getElementById("close-modal").onclick = closeModal;
+
+  // Click outside modal content closes modal
+  modal.addEventListener("mousedown", (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
 });
 
 function openModal(project) {
@@ -96,7 +104,7 @@ function openModal(project) {
 
   if (project.id === "autodrive") {
     mediaDiv.innerHTML = `
-      <iframe class="w-full h-full" src="https://www.youtube.com/embed/AmnK0JQ3ayQ" 
+      <iframe class="w-full h-full" src="https://www.youtube.com/embed/AmnK0JQ3ayQ"
               frameborder="0" allowfullscreen></iframe>`;
   } else if (project.video) {
     mediaDiv.innerHTML = `<video src="${project.video}" autoplay loop muted controls class="w-full h-full object-cover"></video>`;
@@ -114,4 +122,9 @@ function openModal(project) {
     .join("");
 
   document.getElementById("project-modal").classList.remove("hidden");
+}
+
+function closeModal() {
+  document.getElementById("project-modal").classList.add("hidden");
+  document.getElementById("modal-media").innerHTML = "";
 }

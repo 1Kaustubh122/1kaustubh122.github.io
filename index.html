@@ -27,11 +27,12 @@
 <body class="px-1 sm:px-4" data-view="hero">
   <canvas id="bg-canvas"></canvas>
   <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur border border-white/10 rounded-full flex gap-4 px-4 py-2 z-50 overflow-x-auto max-w-full">
-    <a href="#hero" class="nav-link text-sm px-3 py-1 rounded-full font-semibold">Home</a>
-    <a href="#philosophy" class="nav-link text-sm px-3 py-1 rounded-full font-semibold">Philosophy</a>
-    <a href="#projects" class="nav-link text-sm px-3 py-1 rounded-full font-semibold">Execution</a>
-    <a href="#contact" class="nav-link text-sm px-3 py-1 rounded-full font-semibold">Contact</a>
-  </nav>
+  <a href="#hero" class="nav-link text-sm px-3 py-1 rounded-full font-semibold" data-section="hero">Home</a>
+  <a href="#philosophy" class="nav-link text-sm px-3 py-1 rounded-full font-semibold" data-section="philosophy">Philosophy</a>
+  <a href="#projects" class="nav-link text-sm px-3 py-1 rounded-full font-semibold" data-section="projects">Execution</a>
+  <a href="#contact" class="nav-link text-sm px-3 py-1 rounded-full font-semibold" data-section="contact">Contact</a>
+</nav>
+
 
   <main class="max-w-6xl mx-auto">
     <!-- HERO -->
@@ -57,7 +58,7 @@
     </section>
 
     <!-- PHILOSOPHY -->
-    <section id="philosophy" class="section py-1 grid grid-cols-1 md:grid-cols-3 gap-1 text-center md:text-left">
+    <section id="philosophy" class="section py-24 grid grid-cols-1 md:grid-cols-3 gap-1 text-center md:text-left">
       <div>
         <h3 class="text-xl font-bold text-white mb-2">Control Theory</h3>
         <p class="text-slate-400">No academic theater. Control theory is the baseline.</p>
@@ -73,13 +74,13 @@
     </section>
 
     <!-- EXECUTION -->
-    <section id="projects" class="section py-4">
+    <section id="projects" class="section py-8">
       <h2 class="text-3xl font-bold mb-12 text-center tracking-wide text-cyan-300">Execution</h2>
       <div id="project-grid" class="grid grid-cols-1 sm:grid-cols-1 gap-6 "></div>
     </section>
 
     <!-- ROADMAP / UPCOMING -->
-    <section class="py-4 max-w-2xl mx-auto">
+    <section class="py-6 max-w-2xl mx-auto">
       <h2 class="text-2xl font-bold mb-6 text-cyan-400">Coming Soon</h2>
       <ul class="list-disc pl-6 text-slate-400 space-y-2 text-base sm:text-lg">
         <li>Multi-Sensor Fusion for Industrial Robotics (fusion of RGB, LiDAR, IMU, GNSS in real-time pipeline)</li>
